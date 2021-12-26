@@ -1,0 +1,14 @@
+[Unit]
+Description=%i service with docker compose
+Requires=snap.docker.dockerd.service
+After=snap.docker.dockerd.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+WorkingDirectory=/etc/compose/%i
+ExecStart=/snap/bin/docker-compose up -d
+ExecStop=/snap/bin/docker-compose down
+
+[Install]
+WantedBy=multi-user.target
