@@ -3,7 +3,7 @@ version: '2'
 services:
   db:
     image: mariadb:10.5
-    restart: always
+#    restart: always
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     volumes:
       - $NEXTCLOUD_DB_DATADIR:/var/lib/mysql
@@ -12,10 +12,12 @@ services:
       - MYSQL_PASSWORD=$NEXTCLOUD_MYSQL_PWD
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
+    networks:
+      - default
 
   app:
     image: nextcloud:latest
-    restart: always
+#    restart: always
     expose:
       - "80"
       - "443"
@@ -26,14 +28,17 @@ services:
     environment:
 #      - NEXTCLOUD_ADMIN_USER=testuser #this is just for initial setup, and the user can be delete afterwards
 #      - NEXTCLOUD_ADMIN_PASSWORD=test123
-      - NEXTCLOUD_TRUSTED_DOMAINS=nextcloud.emamaker.com emamaker.com
+      - NEXTCLOUD_TRUSTED_DOMAINS=nextcloud.emamaker.com emamaker.com files.emamaker.com
       - MYSQL_PASSWORD=$NEXTCLOUD_MYSQL_PWD
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
       - MYSQL_HOST=db
-      - VIRTUAL_HOST=nextcloud.$LETSENCRYPT_DOMAIN
-      - LETSENCRYPT_HOST=nextcloud.$LETSENCRYPT_DOMAIN
+      - VIRTUAL_HOST=files.$LETSENCRYPT_DOMAIN
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=files.$LETSENCRYPT_DOMAIN
       - LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL
+    networks:
+      - default
 
 networks:
   default:

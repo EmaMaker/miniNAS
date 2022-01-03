@@ -3,22 +3,21 @@ version: "3.3"
 services:
   server:
     image: gitea/gitea:latest
-    restart: always
+#    restart: always
     volumes:
       - $GITEA_DATADIR:/data
-      - $GITEA_CONFIGDIR:/etc/gitea
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
-      - $CERTS_DIR/fullchain.pem:/var/lib/gitea/cert.pem
-      - $CERTS_DIR/privkey.pem:/var/lib/gitea/privkey.pem
     expose:
       - "3000"
       - "2222"
     environment:
-      - VIRTUAL_HOST=gitea.$LETSENCRYPT_DOMAIN
+      - VIRTUAL_HOST=git.emamaker.com
       - VIRTUAL_PORT=3000
-      - LETSENCRYPT_HOST=gitea.$LETSENCRYPT_DOMAIN
-      - LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL
+      - LETSENCRYPT_HOST=git.emamaker.com
+      - LETSENCRYPT_EMAIL=emamaker0@gmail.com
+    networks:
+      - default
 
 networks:
   default:
