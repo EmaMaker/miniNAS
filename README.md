@@ -1,7 +1,7 @@
 # miniNAS Setup
 
 Files for my miniNAS Server, a self-hosted server for different services.<br> Built from computers parts I had laying around, and a custom-built wooden case built from scrap wood.<br>
-Currently running an AMD A10-5700 4/4 APU @3.4GHz, 2x4GB DDR3 RAM, 1TB and 500GB HDDs and a 120GB Kingston SSD<br>
+Currently running an AMD A10-5700 4/4 APU @3.4GHz, 2x4GB DDR3 RAM, 2x1TB HDD in RAID1 and a 120GB Kingston SSD<br>
 miniNAS ships different services: nextcloud, gitea, searx and whatever I decide to add to it.<br>
 This repo contains the file for configuring the server and an explanation of how they work
 
@@ -30,7 +30,7 @@ https://gist.github.com/mosquito/b23e1c1e5723a7fd9e6568e5cf91180f
 ## Backup strategy
 I recently saw a [video about backups by Jeff Geerling](https://www.youtube.com/watch?v=S0KZ5iXTkzg) and I decided to apply his 3-2-1 rule, although mine looks a bit more scuffed. I keep all of my important files on my nextcloud instance, and use my gitea as my git service.
 
-1) Nextcloud data lives on the 500GB HDD of miniNAS. All of it gets compressed and copied to the 1TB HDD on a daily basis. This way I have two copies on two different medias of the same data, and it can be easily restored by just unpacking the data and starting up a new instance
+1) All of the data lives on the RAID1, which copies the data on two different drives at the same time
 2) I use Nextcloud's sync client on my machines (mostly my desktop and laptop), which downloads the data locally on the machine it's used. I tend to sync all of my nextcloud data, although most times I sync just part of it, so most of my data as a couple more copies on two different machines.
 3) I keep my projects on Nextcloud too, and every project has its own git repo which is then pushed to my own gitea. Gitea data lives on the 1TB drive of miniNAS, this means that I have two copies of my Gitea data on two different medias. I tend to sync my Projects on both my desktop and laptop, this means that I have a bit more redudancy for my projects too (see point 2)
 4) My Gitea data gets mirrored to my GitHub periodically and automatically
