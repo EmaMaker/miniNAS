@@ -22,7 +22,7 @@ Also note that systemd entries use docker installed from snap (stored in /var/sn
 https://gist.github.com/mosquito/b23e1c1e5723a7fd9e6568e5cf91180f
 
 * gitea: contains app.ini config file for gitea. Place it in $GITEA_DATADIR/gitea/conf/
-* nginx: contains nginx template. $NGINX_TMPL needs to point to it.
+* nginx: contains custom nginx configs. $NGINX_CONF_DIR needs to point to it.
 
 * ddclient: DDClient config script, location depends on the distro. Activate its systemd entry. DDclient updates the dns record with the public ip of the machine. I use google domains so it's configured for that, stripped down of the creds of course. Examples for different services can be found on the ddclient wiki.
 
@@ -71,10 +71,9 @@ These are the available environment variables:
 
 ### Gitea
 * **GITEA_DATADIR**: directory where gitea data will be stored
-* **GITEA_CONFIGDIR**: directory where gutea config will be stored. Copy you app.ini here
 
 ### Nginx
-* **NGINX_TMPL**: nginx template
+* **NGINX_CONF_DIR**: custom nginx configurations
 
 ### Nextcloud
 
