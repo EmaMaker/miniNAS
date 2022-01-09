@@ -1,0 +1,23 @@
+version: "3.3"
+
+services:
+  server:
+    image: b4bz/homer:latest
+    restart: always
+    volumes:
+      - $HOMER_ASSETS_DIR:/www/assets
+    expose:
+      - "8000"
+    environment:
+      - PORT=8000
+      - VIRTUAL_HOST=www.$LETSENCRYPT_DOMAIN, $LETSENCRYPT_DOMAIN, homer.$LETSENCRYPT_DOMAIN
+      - VIRTUAL_PORT=8000
+      - LETSENCRYPT_HOST=www.$LETSENCRYPT_DOMAIN, $LETSENCRYPT_DOMAIN, homer.$LETSENCRYPT_DOMAIN
+      - LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL
+    networks:
+      - default
+
+networks:
+  default:
+    external:
+      name: $SERVER_DOCKER_NETWORKNAME

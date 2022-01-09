@@ -72,6 +72,9 @@ These are the available environment variables:
 ### Gitea
 * **GITEA_DATADIR**: directory where gitea data will be stored
 
+### Homer
+* **HOMER_ASSETS_DIR**: directory for homer assets
+
 ### Nginx
 * **NGINX_CONF_DIR**: custom nginx configurations
 
