@@ -87,3 +87,5 @@ These are the available environment variables:
 ### Nginx
 * **NGINX_CONF_DIR**: custom nginx configurations
 
+### Searx
+* **SEARX_DIR**: Folder for searx files

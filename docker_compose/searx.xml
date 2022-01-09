@@ -1,0 +1,31 @@
+version: "3.3"
+
+services:
+  searx:
+    container_name: searx
+    image: searx/searx:latest
+    restart: always
+    command: ${SEARX_COMMAND:-}
+    volumes:
+      - $SEARX_DIR:/etc/searx:rw
+    environment:
+      - BIND_ADDRESS=0.0.0.0:3030
+      - BASE_URL=https://searx.$LETSENCRYPT_DOMAIN
+      - VIRTUAL_HOST=searx.$LETSENCRYPT_DOMAIN
+      - VIRTUAL_PORT=3030
+      - LETSENCRYPT_HOST=searx.$LETSENCRYPT_DOMAIN
+      - LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
+      - DAC_OVERRIDE
+    networks:
+      - default
+
+networks:
+  default:
+    external:
+      name: $SERVER_DOCKER_NETWORKNAME
