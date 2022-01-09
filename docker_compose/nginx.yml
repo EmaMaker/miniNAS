@@ -37,7 +37,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "$CERTS_DIR:/etc/nginx/certs:rw"
-      - "/home/emamaker/acme.sh:/etc/acme.sh"
+      - "$ACME_SH_DIR:/etc/acme.sh"
     environment:
       - NGINX_DOCKER_GEN_CONTAINER=nginx-gen
     depends_on:
