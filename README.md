@@ -53,21 +53,15 @@ and adapted to my needs.
 Environment variables can be placed wherever on the system, in a single text file. Then change *EnvironmentFile* in *docker-compose@.service* to point to the absolute path of the file you have created. <br>
 These are the available environment variables:
 
+
+### Certs
+* **CERTS_DIR**: directory where letsencrypt certificates are stored, they will be generated automatically by the acme-companion container
+* **ACME_SH_DIR**: acme.sh for acme-companion container. Certificates are also stored here, this folder is needed to avoid creating a new certificate each restart of a container
+
 ### Docker
 * **SERVER_DOCKER_NETWORKNAME**: name of the network. Create it with
 
         docker network create my_network
-
-### Letsencrypt (https/ssl certificates)
-* **LETSENCRYPT_EMAIL**: email to send letsencrypt messages to
-* **LETSENCRYPT_DOMAIN**: domain to request certificates for
-
-### Certs
-* **CERTS_DIR**: directory where letsencrypt certificates are stored, with owner UID 1000 and GID 1000. Generate them with
-
-        certbot certonly
-
-    then follow the on-screen instructions and copy them to CERTS_DIR
 
 ### Gitea
 * **GITEA_DATADIR**: directory where gitea data will be stored
@@ -75,8 +69,9 @@ These are the available environment variables:
 ### Homer
 * **HOMER_ASSETS_DIR**: directory for homer assets
 
-### Nginx
-* **NGINX_CONF_DIR**: custom nginx configurations
+### Letsencrypt (https/ssl certificates)
+* **LETSENCRYPT_EMAIL**: email to send letsencrypt messages to
+* **LETSENCRYPT_DOMAIN**: domain to request certificates for
 
 ### Nextcloud
 
@@ -88,3 +83,7 @@ These are the available environment variables:
 * **NEXTCLOUD_ADMIN_PWD**
 * **NEXTCLOUD_MYSQL_ROOTPWD**
 * **NEXTCLOUD_MYSQL_PWD**
+
+### Nginx
+* **NGINX_CONF_DIR**: custom nginx configurations
+
