@@ -89,3 +89,6 @@ These are the available environment variables:
 
 ### Searx
 * **SEARX_DIR**: Folder for searx files
+
+### Syncthing
+* **SYNCTHING_DIR**: Folder for syncthing files

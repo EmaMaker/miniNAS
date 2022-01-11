@@ -1,0 +1,30 @@
+version: "3"
+services:
+  syncthing:
+    image: syncthing/syncthing
+    container_name: syncthing
+    hostname: mininas
+    volumes:
+      - $SYNCTHING_DIR:/var/syncthing
+    expose:
+      - 8384
+      - 22000/tcp
+      - 22000/udp
+    environment:
+      - PUID=33
+      - PGID=33
+#      - PUID=1000
+#      - PGID=1000
+      - VIRTUAL_HOST=files.$LETSENCRYPT_DOMAIN
+      - VIRTUAL_PORT=8384
+      - LETSENCRYPT_HOST=files.$LETSENCRYPT_DOMAIN
+      - LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL
+    restart: unless-stopped
+    networks:
+      - default
+
+
+networks:
+  default:
+    external:
+      name: $SERVER_DOCKER_NETWORKNAME
